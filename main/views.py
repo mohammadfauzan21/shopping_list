@@ -15,10 +15,10 @@ import datetime
 
 @login_required(login_url='/login')
 def show_main(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(user=request.user)
 
     context = {
-        'name': 'Pak Bepe',  # Nama kamu
+        'name': request.user.username,
         'class': 'PBP A',  # Kelas PBP kamu
         'products': products,
         'last_login': request.COOKIES['last_login'],
